@@ -5,8 +5,9 @@ provider "ultradns" {
 }
 
 resource "ultradns_record" "a" {
+  for_each = toset( ["a", "aa", "aaa", "aaaa"] )
   zone_name = "0-0-0-0-0antony.com."
-  owner_name = "wwww"
+  owner_name = each.key
   record_type = "A"
   ttl = 800
   record_data = ["1.1.1.1"]
